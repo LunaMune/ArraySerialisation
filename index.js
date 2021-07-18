@@ -4,9 +4,21 @@ const TYPES = {
     F32: 2,
 };
 
-const chr2byte = (c) => String.prototype.charCodeAt.apply(c);
+/*
+    desc: Convert character into ascii representation
+    in: Character
+    out: Number
+    useage: chr2byte("a")
+*/
+export const chr2byte = (c) => String.prototype.charCodeAt.apply(c);
 
-function serialise(arr) {
+/*
+    desc: Convert raw array into unsigned bytes for network communication
+    in: Number | String | Null | ArrayObject
+    out: Uint8Array
+    useage: serialise([1, "2", null]) or serialise("data")
+*/
+export function serialise(arr) {
     let buffer = [];
     arr.forEach(node => {
         if (Number.isFinite(node)) {
@@ -28,7 +40,13 @@ function serialise(arr) {
     return new Uint8Array(buffer);
 }
 
-function deserialise(arr) {
+/*
+    desc: Convert serialised Array-like object back to original form
+    in: ArrayObject | Uint8Array
+    out: ArrayObject
+    useage: deserialise(new Uint8Array([1, 0]));
+*/
+export function deserialise(arr) {
     let buffer = [];
     let offset = 0;
     while (offset < arr.length) {
