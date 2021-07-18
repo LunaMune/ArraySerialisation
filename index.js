@@ -4,9 +4,9 @@ const TYPES = {
     F32: 2,
 };
 
-export const chr2byte = (c) => String.prototype.charCodeAt.apply(c);
+const chr2byte = (c) => String.prototype.charCodeAt.apply(c);
 
-export function serialise(arr) {
+function serialise(arr) {
     let buffer = [];
     arr.forEach(node => {
         if (Number.isFinite(node)) {
@@ -28,7 +28,7 @@ export function serialise(arr) {
     return new Uint8Array(buffer);
 }
 
-export function deserialise(arr) {
+function deserialise(arr) {
     let buffer = [];
     let offset = 0;
     while (offset < arr.length) {
